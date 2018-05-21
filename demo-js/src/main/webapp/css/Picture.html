@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Picture</title>
+    <style>
+        /* 以最大宽度按比例缩小 */
+        #div1 img {
+            border: 0px;
+            max-width: 100px;
+        }
+
+        /* float 悬浮 left|right|none */
+        /* padding 到边界距离 上右下左 */
+        #div2 {
+            width: 300px;
+            float: left;
+        }
+
+        .father {
+            height: 300px;
+        }
+
+        #div2 img {
+            border: 0px;
+            float: right;
+            padding: 10px;
+        }
+
+        /* 和div2并排, 需要设置两个div都为float */
+        #div3 {
+            float: right;
+        }
+
+        #div4 {
+            width: 400px;
+            height: 300px;
+            border: 1px dashed;
+            background-image: url(images/img001.jpg);
+            background-position: center center;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+    <img src="images/img001.jpg"/>
+</div>
+<div class="father">
+    <div id="div2">
+        <p>
+            这是一些文字，这是一些文字，这是一些文字，这是一些文字，这是一些文字，
+            <img src="images/img002.jpg"/>
+            这是一些文字，这是一些文字，这是一些文字，这是一些文字，这是一些文字，这是一些文字，这是一些文字，这是一些文字，这是一些文字，这是一些文字。
+        </p>
+    </div>
+    <div id="div3">
+        <img src="images/img003.jpg"/>
+    </div>
+</div>
+<div id="div4">
+</div>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Array类型</title>
+    <script>
+        var array1 = new Array();
+        var array2 = new Array(10);
+        var array3 = new Array("red", 1, true);
+        var array4 = ["red", "blue", "green"];
+        console.log("array3.length=" + array3.length);
+
+        array3[4] = "blue";
+        console.log("array3.length=" + array3.length);
+
+        console.log("Array.isArray(array3)=" + Array.isArray(array3));
+
+        console.log("array3.toString()=" + array3.toString());
+        console.log('array3.join(",")=' + array3.join("|"));
+        console.log("---------------------------------------------");
+
+        /*---------------------------------------------*/
+        //栈
+        console.log("Stack:");
+        var stack = new Array();
+        stack.push("1", "2", "3");
+        console.log(stack);
+        console.log("stack.pop()=" + stack.pop());
+        console.log(stack);
+        console.log("---------------------------------------------");
+
+        /*---------------------------------------------*/
+        //队列
+        console.log("Queue:");
+        var queue = new Array();
+        queue.push("1", "2", "3");
+        console.log(queue);
+        console.log("queue.shift()=" + queue.shift());
+        console.log(queue);
+        console.log("---------------------------------------------");
+
+        /*---------------------------------------------*/
+        //反方向的队列
+        console.log("Reverse Queue:");
+        var revQueue = new Array();
+        revQueue.unshift("1");
+        revQueue.unshift("2");
+        revQueue.unshift("3");
+        console.log(revQueue);
+        console.log("revQueue.pop()=" + revQueue.pop());
+        console.log(revQueue);
+        console.log("---------------------------------------------");
+
+        /*---------------------------------------------*/
+        //排序
+        var values = [0, 1, 5, 10, 15];
+        values.sort();  //先调用toString()再排序
+        console.log("values.sort()=" + values);
+        values.reverse();
+        console.log("values.reverse()=" + values);
+
+        function compare(value1, value2) {
+            return value1 - value2;
+        }
+        values.sort(compare);
+        console.log("values.compare()=" + values);
+        console.log("---------------------------------------------");
+
+        /*---------------------------------------------*/
+        //操作
+        var colors1 = ["red", "green"];
+        console.log("colors1=" + colors1);
+
+        var colors2 = colors1.concat("yellow", ["black", "brown"]);
+        console.log("colors2=" + colors2);
+
+        var colors3 = colors2.slice(1);
+        console.log("colors3=" + colors3);
+
+        var colors4 = colors2.slice(1, 4);
+        console.log("colors4=" + colors4);
+
+        //splice 第一个参数是位置, 第二个参数是删除的个数, 返回删除的项的数组
+        var colors5 = colors2.splice(0, 2); //删除前两项
+        console.log("colors5=" + colors5);
+        console.log("colors2=" + colors2);
+
+        colors2 = ["red", "green", "yellow", "black", "brown"];
+        colors2.splice(2, 0, "blue"); //在位置2插入blue
+        console.log("colors2=" + colors2);
+
+        colors2 = ["red", "green", "yellow", "black", "brown"];
+        var colors6 = colors2.splice(2, 1, "blue"); //删除yellow, 插入blue
+        console.log("colors2=" + colors2);
+        console.log("---------------------------------------------");
+
+        /*---------------------------------------------*/
+        //位置方法
+        var numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
+        console.log("numbers=" + numbers);
+        console.log("numbers.indexOf(4)=" + numbers.indexOf(4));
+        console.log("numbers.lastIndexOf(4)=" + numbers.lastIndexOf(4));
+        console.log("---------------------------------------------");
+
+        /*---------------------------------------------*/
+        //迭代方法
+        //every 对数组中的每一项运行给定函数, 如果都返回true, 则返回true
+        var everyResult = numbers.every(function(item, index, array){
+           return (item > 2);
+        });
+        console.log("numbers.every=" + everyResult);
+
+        //some 对数组中的每一项运行给定函数, 如果任一项返回true, 则返回true
+        var someResult = numbers.some(function(item, index, array){
+            return (item > 2);
+        });
+        console.log("numbers.some=" + someResult);
+
+        //filter 对数组中的每一项运行给定函数, 返回该函数会返回true的项组成的数组
+        var filterResult = numbers.filter(function(item, index, array){
+            return (item > 2);
+        });
+        console.log("numbers.filter=" + filterResult);
+
+        //map 对数组中的每一项运行给定函数, 返回结果组成的数组
+        var mapResult = numbers.map(function(item, index, array){
+            return item * 2;
+        });
+        console.log("numbers.map=" + mapResult);
+
+        var forEachResult;
+        numbers.forEach(function(item, index, array){
+            forEachResult += ("[" + index + "," + item + "]");
+        });
+        console.log("numbers.forEach=" + forEachResult);
+        console.log("---------------------------------------------");
+
+        /*---------------------------------------------*/
+        //归并方法
+        values = [1, 2, 3, 4, 5];
+        //reduce 函数的返回值做为prev参数传给下一项
+        var sum = values.reduce(function(prev, cur, index, array){
+            return prev + cur;
+        });
+        console.log("values=" + values);
+        console.log("values.reduce=" + sum);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

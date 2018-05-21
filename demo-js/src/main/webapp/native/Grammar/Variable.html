@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变量</title>
+    <script>
+        /*---------------------------------------------*/
+        if(true) {
+            var color = "blue";
+        }
+        console.log("if块外访问变量=" + color); //blue
+
+        for(var i = 0; i < 10; i++) {}
+        console.log("for结束后访问变量=" + i);
+        console.log("---------------------------------------------");
+
+        //使用临时变量的方法
+        (function() {
+            for(var j = 0; j < 10; j++) {}
+        })();
+        //console.log("for结束后访问变量=" + j);  无法访问
+
+        /*---------------------------------------------*/
+        //定义变量是否使用var的区别
+        function someFunc() {
+            msg1 = "函数结束后可以访问";
+            var msg2 = "函数结束后不可访问";
+        }
+        someFunc();
+        console.log("函数结束后访问无var定义的变量=" + msg1);
+        console.log("函数结束后访问var定义的变量=" + typeof(msg2));  //undefined
+        console.log("---------------------------------------------");
+
+        /*---------------------------------------------*/
+        //typeof
+        console.log('typeof("x")=' + typeof("x"));
+        console.log('typeof(true)=' + typeof(true));
+        console.log('typeof(1)=' + typeof(1));
+        console.log('typeof(notdefine)=' + typeof(notdefine));
+        console.log('typeof(null)=' + typeof(null));
+        console.log('typeof(someFunc)=' + typeof(someFunc));
+    </script>
+</head>
+<body>
+<script>
+
+</script>
+</body>
+</html>

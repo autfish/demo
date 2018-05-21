@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建对象</title>
+    <script>
+        //组合使用构造函数模式和原型模式创建自定义类型
+        //每个实例独立部分在构造函数中定义, 公共部分在原型中定义
+        function Person(name, age, job) {
+            this.name = name;
+            this.age = age;
+            this.job = job;
+            this.friends = new Array();
+        }
+        Person.prototype = {
+            constructor: Person,
+            sayName: function() {
+                console.log("My name is " + this.name);
+            }
+        }
+        var person1 = new Person("Nicholas", 29, "Engineer");
+        var person2 = new Person("Greg", 27, "Doctor");
+        person1.friends.push("Shelby");
+        person2.friends.push("Van");
+
+        //寄生构造函数模式
+        function SpecialArray() {
+            var values = new Array();
+            values.push.apply(values, arguments);
+            values.toPipedString = function() {
+                return this.join("|");
+            }
+            return values;
+        }
+        var colors = new SpecialArray("red", "blue", "green");
+        colors.toPipedString();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

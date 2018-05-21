@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Form</title>
+    <style>
+        div { height: 30px; }
+    </style>
+</head>
+<body>
+<form id="form1" action="#" method="post">
+    <div>
+        color: <input type="color" id="favColor" name="favColor" />
+    </div>
+    <div>
+        output: <output for="favColor" />
+    </div>
+    <div>
+        date: <input type="date" name="myDate" />
+    </div>
+    <div>
+        number: <input type="number" name="number1" min="-5" max="100" step="5" />
+    </div>
+    <div>
+        range: <input type="range" name="range" min="-5" max="100" step="5" />
+    </div>
+    <div>
+        email: <input type="email" name="email" />
+    </div>
+    <div>
+        meter: <meter min="0" max="10" low="3" optimum="7" hign="9" value="9.5"></meter>
+    </div>
+    <div>
+        progress: <progress min="0" max="10" value="9.5"></progress>
+    </div>
+    <div>
+        details:
+        <details onclick="this.open='open'">
+            <dt>Help?</dt>
+            <dd>Some text</dd>
+        </details>
+    </div>
+</form>
+</body>
+</html>

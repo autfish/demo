@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object类型</title>
+    <script>
+        var o = new Object();
+        console.log("var o = new Object();");
+        console.log("o.constructor=" + o.constructor);
+        o.name = "Tom";
+        console.log("o.name = \"Tom\";");
+        console.log('o.hasOwnProperty("name")=' + o.hasOwnProperty("name"));
+        console.log('o.hasOwnProperty("age")=' + o.hasOwnProperty("age"));
+        console.log('o.isPrototypeOf(Object)=' + o.isPrototypeOf(Object));
+        console.log('o.propertyIsEnumerable("name")=' + o.propertyIsEnumerable("name"));
+        console.log('o.toLocaleString()=' + o.toLocaleString());
+        console.log('o.toString()=' + o.toString());
+        console.log('o.valueOf()=' + o.valueOf());
+        console.log('typeof(o)=' + typeof(o));
+        console.log('o instanceof Object=' + (o instanceof Object));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

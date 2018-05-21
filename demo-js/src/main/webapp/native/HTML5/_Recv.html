@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/event.util.js"></script>
+    <script>
+        window.onload = function() {
+            var eventUtil = new EventUtil();
+            eventUtil.addHandler(window, "message", function(event){
+                event = eventUtil.getEvent(event);
+                document.getElementById("revMsg").innerHTML = event.data;
+                event.source.postMessage("Received!", "*");
+            });
+        }
+    </script>
+</head>
+<body style="background-color: aliceblue">
+<div id="revMsg"></div>
+</body>
+</html>

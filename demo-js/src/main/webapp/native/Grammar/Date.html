@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Date类型</title>
+    <script>
+        var d1 = new Date();
+        console.log("new Date()=" + d1);
+        var d2 = Date.parse("2016-10-11");
+        console.log('Date.parse("2016-10-11")=' + d2);
+
+        console.log("d1.toDateString()=" + d1.toDateString());
+        console.log("d1.toTimeString()=" + d1.toTimeString());
+        console.log("d1.toLocaleDateString()=" + d1.toLocaleDateString());
+        console.log("d1.toLocaleTimeString()=" + d1.toLocaleTimeString());
+        console.log("d1.toUTCString()=" + d1.toUTCString());
+
+        var start = Date.now();
+        var stop = Date.now();
+        console.log("消耗" + (stop - start));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

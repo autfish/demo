@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Selectors API</title>
+    <script>
+        console.log("document.readyState=" + document.readyState);
+        window.onload= function(){
+            console.log("document.readyState=" + document.readyState);
+
+            //取得head和body
+            var head = document.head || document.getElementsByTagName("head")[0];
+            var body = document.querySelector("body");
+            console.log('document.querySelector("body")=' + body);
+
+            //取得ID为 myDiv 的元素
+            var myDiv = document.querySelector("#myDiv");
+            console.log('document.querySelector("#myDiv")=' + myDiv);
+            //取得css为 selected 的第一个元素
+            var selected = document.querySelector(".selected");
+            console.log('document.querySelector(".selected")=' + selected);
+            //取得css为 selected 的所有元素
+            var selecteds = document.querySelectorAll(".selected");
+            console.log('document.querySelectorAll(".selected")=' + selecteds);
+            //取得css为 button 的第一个图像元素
+            var img = document.querySelector("img.button");
+            console.log('document.querySelector("img.button")=' + img);
+
+            //html5: 自定义属性
+            var appId = myDiv.dataset.appId;
+            console.log('myDiv.dataset.appId=' + appId);
+            var myName = myDiv.dataset.myName;
+            console.log('myDiv.dataset.myName=' + myName);
+
+            //html5: 替代childNodes和firstChild, 避免浏览器行为不一致
+            console.log("myDiv.childElementCount=" + myDiv.childElementCount);
+            console.log("myDiv.firstElementChild=" + myDiv.firstElementChild);
+            console.log("myDiv.lastElementChild=" + myDiv.lastElementChild);
+            console.log("myDiv.previousElementSibling=" + myDiv.previousElementSibling);
+            console.log("myDiv.nextElementSibling=" + myDiv.nextElementSibling);
+
+            var all = document.getElementsByClassName("selected button");
+            console.log('document.getElementsByClassName("selected button")=' + all);
+
+            console.log("myDiv.className=" + myDiv.className);
+            var classList = myDiv.classList;
+            console.log("myDiv.classList=" + classList);
+            classList.add("c4");
+            classList.remove("c1");
+            console.log('classList.contains("c1")=' + classList.contains("c1"));
+            //如果存在则删除, 不存在则添加
+            classList.toggle("c5");
+
+            //focus
+            console.log("document.activeElement=" + document.activeElement);
+            var button = document.querySelector("#myButton");
+            button.focus();
+            console.log("document.activeElement=" + document.activeElement);
+
+            //让元素可见
+            myDiv.scrollIntoView();
+        }
+    </script>
+</head>
+<body class="page1">
+<div id="myDiv" class="c1 c2 c3" data-appId="12345" data-myName="Nicholas">
+    <div class="selected"></div>
+    <div class="selected"></div>
+    <image class="button"></image>
+</div>
+<input type="button" id="myButton" />
+</body>
+</html>

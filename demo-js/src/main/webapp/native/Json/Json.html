@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON</title>
+    <script>
+        var book = {
+            title: "JavaScript",
+            authors: ["Tom", "Jerry"],
+            edition: 3,
+            year: 2011
+        };
+        var jsonText = JSON.stringify(book);
+        console.log("JSON.stringify(book)=" + jsonText);
+
+        jsonText = JSON.stringify(book, ["title", "edition"]);
+        console.log("JSON.stringify(book, [\"title\", \"edition\"])=" + jsonText);
+
+        //第三个参数, 控制缩进
+        jsonText = JSON.stringify(book, null, 4);
+        console.log("JSON.stringify(book, null, 4)=" + jsonText);
+
+        jsonText = JSON.stringify(book, function(key, value){
+            switch(key) {
+                case "authors":
+                    return value.join(",");
+                case "year":
+                    return 5000;
+                case "edition":
+                    return undefined;
+                default:
+                    return value;
+            }
+        });
+        console.log("JSON.stringify(book, function)=" + jsonText);
+
+        jsonText = JSON.stringify(book);
+        var bookCopy = JSON.parse(jsonText);
+        console.log("JSON.parse(jsonText)=" + JSON.stringify(bookCopy));
+        console.log("bookCopy.title=" + bookCopy.title);
+        console.log("bookCopy.authors[0]=" + bookCopy.authors[0]);
+
+        bookCopy = JSON.parse(jsonText, function(key, value){
+            if(key == "year") {
+                return 2016;
+            } else {
+                return value;
+            }
+        });
+        console.log("JSON.parse(jsonText, function)=" + JSON.stringify(bookCopy));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

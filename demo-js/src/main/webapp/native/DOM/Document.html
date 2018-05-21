@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>document类型</title>
+    <script>
+        window.onload = function () {
+            var html = document.documentElement; //html
+            console.log("document.documentElement=" + html);
+            console.log("document.documentElement.title=" + html.title); //id,title,className
+
+            var body = document.body; //body
+            console.log("document.body=" + body);
+            var doctype = document.doctype;
+            console.log("document.doctype=" + doctype);
+
+            console.log("document.anchors=" + document.anchors); //所有带name特性的<a>元素
+            console.log("document.links=" + document.links); //所有带href特性的<a>元素
+            console.log("document.forms=" + document.forms); //所有<form>元素
+            console.log("document.images=" + document.images); //所有<img>元素
+
+            var baidu = document.links[0];
+            console.log("document.links[0].nodeName=" + baidu.nodeName); //或tagName
+            console.log("document.links[0].nodeType=" + baidu.nodeType);
+            console.log("document.links[0].nodeValue=" + baidu.nodeValue);
+
+            //属性操作
+            var href = baidu.href;
+            console.log('link.href=' + href);
+            baidu.setAttribute("my_attr", "hello");
+            var customValue = baidu.getAttribute("my_attr");
+            console.log('getAttribute("my_attr")=' + customValue);
+            baidu.removeAttribute("href");
+
+            //遍历属性
+            for(var i = 0; i < baidu.attributes.length; i++) {
+                if(baidu.attributes[i].specified)
+                    console.log(baidu.attributes[i].nodeName + "=" + baidu.attributes[i].nodeValue);
+            }
+
+            //创建元素
+            var div = document.createElement("div");
+            div.id = "myNewDiv";
+            //div.innerHTML = "新div";
+            var textNode = document.createTextNode("Hello world!");
+            div.appendChild(textNode);
+            document.body.appendChild(div);
+
+            //子节点
+            var myList = document.getElementById("myList");
+            for(var j = 0; j < myList.childNodes.length; j++) {
+                console.log('myList.childNodes[' + j  + '].nodeName=' + myList.childNodes[j].nodeName + ',nodeType=' + myList.childNodes[j].nodeType + ",nodeValue=" + myList.childNodes[j].nodeValue);
+            }
+
+            //创建table
+            var table = document.createElement("table");
+            table.border = 1;
+            var tbody = document.createElement("tbody");
+            table.appendChild(tbody);
+            tbody.insertRow(0);
+            tbody.rows[0].insertCell(0);
+            tbody.rows[0].cells[0].appendChild(document.createTextNode("Cell 1, 1"));
+            tbody.rows[0].insertCell(1);
+            tbody.rows[0].cells[1].appendChild(document.createTextNode("Cell 2, 1"));
+            tbody.insertRow(1);
+            tbody.rows[1].insertCell(0);
+            tbody.rows[1].cells[0].appendChild(document.createTextNode("Cell 1, 2"));
+            tbody.rows[1].insertCell(1);
+            tbody.rows[1].cells[1].appendChild(document.createTextNode("Cell 2, 2"));
+            document.body.appendChild(table);
+        }
+    </script>
+</head>
+<body>
+<a href="http://www.baidu.com" id="baidu" name="baidu">百度</a><br>
+<ul id="myList"><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>
+</body>
+</html>

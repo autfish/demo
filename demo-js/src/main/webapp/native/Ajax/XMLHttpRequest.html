@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            /**
+             * readyState
+             * 0尚未调用open()方法
+             * 1已经调用open(), 尚未调用send()方法
+             * 2已经调用send(), 尚未接收到响应
+             * 3接收到部分响应数据
+             * 4完成
+             */
+            if(xhr.readyState == 4) {
+                console.log("xhr.status=" + xhr.status);
+                console.log("xhr.statusText=" + xhr.statusText);
+                console.log("xhr.responseText=" + xhr.responseText);
+                console.log("xhr.responseXML=" + xhr.responseXML);
+                console.log("xhr.getResponseHeader(\"cache-control\")=" + xhr.getResponseHeader("cache-control"));
+            }
+        };
+        xhr.open("get", "_example.html", false);
+        xhr.setRequestHeader("MyHeader", "MyValue");
+        xhr.send(null);
+
+        xhr.open("post", "_example.html", true);
+        var form = document.getElementById("user-info");
+        xhr.send(new FormData(form));
+    </script>
+</head>
+<body>
+<input type="text" id="user-info" value="Tom" />
+</body>
+</html>

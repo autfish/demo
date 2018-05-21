@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>String类型</title>
+    <script>
+        var num = 10;
+        console.log("var num = 10;");
+        console.log("num.toString()=" + num.toString());
+        console.log("String(undefined)=" + String(undefined));
+
+        var text = "hello world";
+        console.log(text.length);
+        console.log(text.charAt(1));
+        console.log(text.charCodeAt(1));
+        console.log(text[1]);
+        console.log(text.slice(3));
+        console.log(text.substring(3));
+        console.log(text.substr(3));
+        console.log(text.slice(3, 7));
+        console.log(text.substring(3, 7));
+        console.log(text.substr(3, 7));
+        console.log(text.indexOf("o"));
+        console.log(text.indexOf("o", 6));
+        console.log(text.lastIndexOf("o"));
+        console.log(text.lastIndexOf("o", 6));
+
+        text = "cat, bat";
+        var matches = text.match(/.at/);
+        console.log(matches[0]);
+
+        var pos = text.search(/at/);
+        console.log(pos);
+
+        var result = text.replace("at", "ond");
+        console.log(result);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

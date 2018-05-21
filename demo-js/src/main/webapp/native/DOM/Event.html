@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件</title>
+    <script type="text/javascript" src="../js/event.util.js"></script>
+    <script>
+        var eventUtil = new EventUtil();
+
+        window.onload = function () {
+            //DOM 0级事件处理程序
+            var myBtn = document.getElementById("myBtn");
+            myBtn.onclick = function() {
+                console.log("myBtn.onclick, event.type=" + event.type + ",event.cancelable=" + event.cancelable);
+                myBtn.onclick = null;
+            };
+            //DOM 2级事件处理程序
+            myBtn.addEventListener("mouseout", function () {
+                console.log("myBtn.mouseout, event.type=" + event.type);
+            }, false);
+            var mouseout = function() {
+                console.log("myBtn.mouseout2");
+            }
+            myBtn.addEventListener("mouseout", mouseout, false);
+            myBtn.removeEventListener("mouseout", mouseout, false);
+
+            //自定义跨浏览器事件处理
+            var mouseover = function() {
+                console.log("myBtn.mouseover, event.type=" + event.type);
+            }
+            eventUtil.addHandler(myBtn, "mouseover", mouseover);
+            eventUtil.removeHandler(myBtn, "mouseover", mouseover);
+
+            var myLink = document.getElementById("myLink");
+            myLink.onclick = function(event) {
+                if(!window.confirm("确定跳转吗?")) {
+                    //取消事件默认行为
+                    event.preventDefault();
+                    //取消向上传播
+                    event.stopPropagation();
+                }
+            };
+
+            //鼠标事件click, dbclick, mousedown, mouseenter, mouseleave, mousemove, mouseout, mouseover, mouseup
+            var myDiv = document.getElementById("myDiv");
+            eventUtil.addHandler(myDiv, "click", function(event) {
+                event = eventUtil.getEvent();
+                //可见窗口内坐标位置(不包括浏览器工具栏、不包含页面滚动后隐藏的距离)
+                console.log('event.clientX,event.clientY=' + event.clientX + "," + event.clientY);
+                //距离整个页面左上角的坐标(包含页面滚动后隐藏的距离), ie9以下不支持
+                console.log('event.pageX,event.pageY=' + event.pageX + "," + event.pageY);
+                //ie8
+                var pageX = event.pageX, pageY = event.pageY;
+                if(pageX == undefined)
+                        pageX = event.clientX + (document.body.scrollLeft || document.documentElement.scrollLeft);
+                if(pageY == undefined)
+                        pageY = event.clientY + (document.body.scrollTop || document.documentElement.scrollTop);
+                //在整个屏幕中的坐标
+                console.log('event.screenX,event.screenY=' + event.screenX + "," + event.screenY);
+
+                //检查鼠标事件时是否按住了Shift, Ctrl, Alt, Meta(Windows键)
+                console.log("event.shiftKey=" + event.shiftKey);
+                console.log("event.ctrlKey=" + event.ctrlKey);
+                console.log("event.altKey=" + event.altKey);
+                console.log("event.metaKey=" + event.metaKey);
+            });
+
+            //键盘事件keydown, keypress, keyup, textInput(可编辑区域、能够输入实际字符的键触发)
+            var myText = document.getElementById("myText");
+            eventUtil.addHandler(myText, "keyup", function(event) {
+                event = eventUtil.getEvent();
+                console.log("event.keyCode=" + event.keyCode);
+                var identifier = event.key || event.keyIdentifier;
+                if(identifier) {
+                    console.log("event.key=" + event.key);
+                }
+            });
+            eventUtil.addHandler(myText, "textInput", function(event) {
+                event = eventUtil.getEvent();
+                console.log("event.data=" + event.data);
+            });
+
+            //contextmenu事件 自定义右键菜单
+            eventUtil.addHandler(myDiv, "contextmenu", function(event){
+                event = eventUtil.getEvent();
+                eventUtil.preventDefault(event);
+                var menu = document.getElementById("myMenu");
+                menu.style.left = event.clientX + "px";
+                menu.style.top = event.clientY + "px";
+                menu.style.visibility = "visible";
+            });
+            eventUtil.addHandler(document, "click", function(event) {
+                document.getElementById("myMenu").style.visibility = "hidden";
+            });
+
+            //模拟事件
+            var event = document.createEvent("MouseEvents");
+            event.initEvent("click", true, true, document.defaultView, 0, 0, 0, 0, 0,
+                false, false, false, false, 2, null);
+            myDiv.dispatchEvent(event);
+        }
+
+        eventUtil.addHandler(window, "load", function(event){
+            console.log("window.load");
+        });
+        eventUtil.addHandler(window, "unload", function(event){
+            console.log("window.unload");
+        });
+        eventUtil.addHandler(window, "resize", function(event){
+            console.log("window.resize");
+        });
+        eventUtil.addHandler(window, "scroll", function(event){
+            console.log("window.scroll");
+        });
+        eventUtil.addHandler(window, "hashchange", function(event) {
+            console.log("location.hash=" + location.hash);
+        });
+    </script>
+</head>
+<body>
+<input type="text" id="myText" style="width:200px" />
+<input type="button" id="myBtn" value="Click" />
+<a id="myLink" href="http://www.baidu.com">百度</a>
+<div id="myDiv">
+<img id="myImg" onload="alert('image loaded')" src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png" />
+</div>
+<ul id="myMenu" style="position:absolute;visibility:hidden;background-color:silver">
+    <li><a href="http://taobao.com">淘宝</a></li>
+    <li><a href="http://qq.com">腾讯</a></li>
+</ul>
+</body>
+</html>

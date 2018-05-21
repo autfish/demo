@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+    <script type="text/javascript" src="../js/event.util.js"></script>
+    <script>
+        var eventUtil = new EventUtil();
+        window.onload = function() {
+            var myText = document.getElementById("myText");
+            //公共属性
+            console.log("myText.disabled=" + myText.disabled);
+            console.log("myText.form=" + myText.form);
+            console.log("myText.name=" + myText.name);
+            console.log("myText.readOnly=" + myText.readOnly);
+            console.log("myText.tabIndex=" + myText.tabIndex);
+            console.log("myText.type=" + myText.type);
+            console.log("myText.value=" + myText.value);
+
+            eventUtil.addHandler(myText, "focus", function(event) {
+                event = eventUtil.getEvent(event);
+                var target = eventUtil.getTarget(event);
+                if(target.style.backgroundColor != "red") {
+                    target.style.backgroundColor = "yellow";
+                }
+                target.select();
+            });
+            eventUtil.addHandler(myText, "blur", function(event){
+                event = eventUtil.getEvent(event);
+                var target = eventUtil.getTarget(event);
+                if(/[^\d]/.test(target.value)) {
+                    target.style.backgroundColor = "red";
+                } else {
+                    target.style.backgroundColor = "";
+                }
+            });
+            eventUtil.addHandler(myText, "change", function(event) {
+                event = eventUtil.getEvent(event);
+                var target = eventUtil.getTarget(event);
+                if(/[^\d]/.test(target.value)) {
+                    target.style.backgroundColor = "red";
+                } else {
+                    target.style.backgroundColor = "";
+                }
+            });
+            eventUtil.addHandler(myText, "keypress", function(event) {
+                event = eventUtil.getEvent(event);
+                var target = eventUtil.getTarget(event);
+                var charCode = eventUtil.getCharCode(event);
+                if(!/\d/.test(String.fromCharCode(charCode)) && charCode > 9 && !event.ctrlKey) {
+                    eventUtil.preventDefault(event);
+                }
+            });
+            eventUtil.addHandler(myText, "paste", function(event){
+                event = eventUtil.getEvent(event);
+                var text = eventUtil.getClipboardText(event);
+                if(!/^\d*$/.test(text)) {
+                    eventUtil.preventDefault(event);
+                }
+            });
+
+            var mySelect = document.getElementById("mySelect");
+            console.log("mySelect.options[0].text=" + mySelect.options[0].text);
+            console.log("mySelect.options[0].value=" + mySelect.options[0].value);
+            console.log("mySelect.selectedIndex=" + mySelect.selectedIndex);
+            console.log("mySelect[mySelect.selectedIndex]=" + mySelect[mySelect.selectedIndex]);
+            console.log("mySelect[mySelect.selectedIndex].text=" + mySelect[mySelect.selectedIndex].text);
+            console.log("mySelect[mySelect.selectedIndex].value=" + mySelect[mySelect.selectedIndex].value);
+            mySelect.options[1].selected = true;
+
+            //添加
+            mySelect.appendChild(new Option("C", 3), undefined);
+            mySelect.appendChild(new Option("D", 4), undefined);
+            //删除
+            mySelect.remove(0);
+            //移动到另一个下拉框
+            var otherSelect = document.getElementById("otherSelect");
+            otherSelect.appendChild(mySelect.options[2]);
+            //向上移动
+            var moveUp = mySelect[1];
+            mySelect.insertBefore(moveUp, mySelect.options[moveUp.index - 1]);
+            //向下移动
+            var moveDown = otherSelect[0];
+            otherSelect.insertBefore(moveDown, otherSelect.options[moveDown.index + 2]);
+
+            console.log("serialize(document.forms[0])=" + serialize(document.forms[0]));
+        };
+
+        //序列化表单(用于ajax)
+        function serialize(form) {
+            var parts = [], field = null, i, len, j, optLen, option, optValue;
+            for(i = 0, len = form.elements.length; i < len; i++) {
+                field = form.elements[i];
+                switch (field.type) {
+                    case "select-one":
+                    case "select-multiple":
+                        if(field.name.length) {
+                            for(j = 0, optLen = field.options.length; j < optLen; j++) {
+                                option = field.options[j];
+                                if(option.selected) {
+                                    optValue = "";
+                                    if(option.hasAttribute) {
+                                        optValue = (option.hasAttribute("value") ? option.value : option.text);
+                                    } else {
+                                        optValue = (option.attributes["value"].specified ? option.value : option.text)
+                                    }
+                                    parts.push(encodeURIComponent(field.name) + "=" + encodeURIComponent(optValue));
+                                }
+                            }
+                        }
+                        break;
+                    case undefined:
+                    case "file":
+                    case "reset":
+                    case "button":
+                        break;
+                    case "radio":
+                    case "checkbox":
+                        if(!field.checked) {
+                            break;
+                        }
+                    default:
+                        if(field.name.length) {
+                            parts.push(encodeURIComponent(field.name) + "=" + encodeURIComponent(field.value));
+                        }
+                }
+            }
+            return parts.join("&");
+        }
+
+        function copyRichedit() {
+            console.log(document.getElementById("richedit").innerHTML);
+        }
+    </script>
+</head>
+<body>
+<form name="form1" id="form1">
+    <input type="text" id="myText" name="myTextName" value="文本" /><br />
+    <!-- html5 -->
+    <input type="text" name="required" required /><br />
+    <input type="email" name="email" /><br />
+    <input type="url" name="url" /><br />
+    <!-- end html5 -->
+    <select name="mySelect" id="mySelect">
+        <option value="1">A</option>
+        <option value="2">B</option>
+    </select>
+    <select name="otherSelect" id="otherSelect">
+        <option value="26">Z</option>
+    </select>
+    <input type="submit" /><br />
+    <!-- contenteditable 允许直接编辑文本 -->
+    <div class="editable" id="richedit" contenteditable style="background-color: yellow"></div><input type="button" value="富文本" onclick="copyRichedit()" />
+</br>
+
+</form>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Ajax</title>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            //页面上动态载入内容
+            $('#content').html('<img src="images/loading.gif" alt="" />');
+            $('#content').load('_Content.html .ajax', function(responseText, textStatus, XMLHttpRequest){
+                if(XMLHttpRequest.status == 404 || XMLHttpRequest.status == 500) {
+                    $('#content').html('error');
+                }
+            });
+
+            //提交表单
+            /*
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: "json",
+                data: data,
+                beforeSend: function() {
+                },
+                success: function(data) {
+                },
+                error: function() {
+                }
+            });
+            */
+            $.ajax({
+                type: 'POST',
+                url: "_Json.html",
+                dataType: "json",
+                data: "type=json",
+                beforeSend: function() {
+                },
+                success: function(data) {
+                    var json;
+                    if(data instanceof String) {
+                        json = eval("(" + data + ")");
+                    } else {
+                        json = data;
+                    }
+                    if(json.code == 1) {
+                        var values = eval(json.values);
+                        $(values).each(function(index) {
+                            alert(values[index].key);
+                        });
+                    }
+                },
+                error: function() {
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="content"></div>
+</body>
+</html>

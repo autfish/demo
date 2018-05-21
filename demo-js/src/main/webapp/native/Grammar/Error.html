@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error处理</title>
+    <script>
+        try {
+            throw new SyntaxError("oh...");
+        } catch(error) {
+            if(error instanceof  SyntaxError) {
+                console.log("a SyntaxError, message=" + error.message);
+            } else {
+                console.log("not a SyntaxError, message=" + error.message);
+            }
+        } finally {
+            console.log("finally...");
+        }
+        //自定义错误
+        function CustomError(message) {
+            this.name = "CustomError";
+            this.message = message;
+        }
+        CustomError.prototype = new Error();
+
+        //上传错误到服务器
+        function logError(sev, msg) {
+            var img = new Image();
+            img.src = "log.php?sev=" + encodeURIComponent(sev) + "&msg=" + encodeURIComponent(msg);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

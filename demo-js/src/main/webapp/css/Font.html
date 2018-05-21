@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Font</title>
+    <style>
+        /* 绝对长度单位
+         in  英寸
+         cm  厘米
+         mm  毫米
+         pt  点
+         pc  派卡
+         */
+        /* 相对长度单位
+         px  像素
+         em  给定字体的font-size值
+        */
+        #div1 { font-weight: bold; }
+        #div2 { font-style: italic }
+        #div3 { text-indent: -2em; padding-left: 2em; line-height: 3em; }
+        #div4 { text-align: center; vertical-align: baseline; }
+        #div5 { word-spacing: 0.5em; }
+        #div6 { letter-spacing: 0.5em; }
+        /* word-wrap: break-word; 先尝试换行放, 然后再拆分单词 */
+        #div7 { width: 200px; background-color: #aaaaaa; word-wrap: break-word; }
+        /* word-break: break-all; 直接拆分单词 */
+        #div8 { width: 200px; background-color: #cccccc; word-break: break-all; }
+
+        #div9 ol { list-style-type: upper-roman; }
+
+        #div10 ul { list-style-type: circle; }
+    </style>
+</head>
+<body>
+<div id="div1">
+    这是加粗效果
+</div>
+<div id="div2">
+    这是斜体效果
+</div>
+<div id="div3">
+    首行缩进<br />
+    行间距
+</div>
+<div id="div4">
+    水平和垂直对齐
+</div>
+<div id="div5">
+    word spacing 字间隔
+</div>
+<div id="div6">
+    letter spacing 字母间隔
+</div>
+<div id="div7">
+    this is a longworldddddddddddddddddddddddddddddddddddddddddd
+</div>
+<div id="div8">
+    this is a longworldddddddddddddddddddddddddddddddddddddddddd
+</div>
+<div id="div9">
+    <ol>
+        <li>第一条</li>
+        <li>第二条</li>
+    </ol>
+</div>
+<div id="div10">
+    <ul>
+        <li>第一条</li>
+        <li>第二条</li>
+    </ul>
+</div>
+</body>
+</html>

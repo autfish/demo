@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Selectors</title>
+    <style>
+        /* 全部元素 */
+        * { font-size: 14px; }
+        a { text-decoration: none; }
+        /* 选择器分组 */
+        p,h1,h2 { color:grey; }
+
+        /* class中包含warning的任意元素 */
+        .warning { color:red; }
+        /* class中包含warning的p元素 */
+        p.warning { font-weight: bold; }
+        /* class中同时包含warning和urgent的元素 */
+        .warning.urgent { background: silver; }
+
+        /* id选择器 */
+        #div1 {border: 1px solid; }
+
+        /* 包含href和title属性的a元素 */
+        a[href][title] { color:green; }
+        /* 匹配属性值 */
+        input[tip="username is required"] { width: 300px; }
+        /* 匹配部分属性值 其他 ^=xxx匹配属性列表以xxx开头 $=xxx匹配属性列表以xxx结尾 *=xxx匹配任一属性中含有xxx字符 */
+        input[tip~="required"] { border: 1px solid #7abd54; }
+
+        /* 后代选择, 任意级别 */
+        div em { color:blue; }
+        /* 后代选择, 子级 */
+        div > em { color:purple; }
+
+        /* 伪类选择器 */
+        #div2 a:link { color:navy; }
+        #div2 a:hover { color:red; }
+        #div2 a:active { color:yellow; }
+        /* #div2 a:visited { color:gray; } */
+
+        #div3 a:link:hover { color: red; }
+        #div3 a:visited:hover { color: maroon; }
+
+        input:focus { background: silver; }
+
+        /* 其他伪类 :first-child :first-letter :first-line :before :after */
+    </style>
+</head>
+<body>
+<p>only p</p>
+<span class="warning">span class="warning"</span>
+<p class="warning">p class="warning"</p>
+<p class="warning urgent">p class="warning urgent"</p>
+<div id="div1">div id="div1"</div>
+<p>
+    <a href="#">a href="#"</a>
+</p>
+<p>
+    <a href="#" title="title">a href="#" title="title"</a>
+</p>
+<p>
+    <input type="text" value='input type=\"text\"' />
+</p>
+<p>
+    <input type="text" tip="username is required" value='input type=\"text\" tip=\"username is required\"' />
+</p>
+<div>
+    <p><em>div p em</em></p>
+    <em>div em</em>
+</div>
+<div id="div2">
+    <a href="#">div2 Link</a>
+</div>
+<div id="div3">
+    <a href="#">div3 Link</a>
+</div>
+</body>
+</html>

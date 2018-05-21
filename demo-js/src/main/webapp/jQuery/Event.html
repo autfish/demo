@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Event</title>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            //使用.bind()绑定事件处理函数, 仅适用于DOM中已经存在的元素
+            function addNew() {
+                $(this).clone().appendTo('#bind');
+            }
+            $('.bind1').bind('click', addNew);
+
+            //使用.on()绑定事件处理函数, 作用于将来可能存在(动态生成)的元素
+            $("#live").on("click", ".live1", function(){
+                $(this).clone().appendTo('#live');
+            });
+
+            $("#product img").bind({
+                mouseenter: function() {
+                    var toolTip = $(this).attr("title");
+                    $('.info').after('<p class="toolTip">' + toolTip + '</p>');
+                },
+                mouseleave: function() {
+                    $('p.toolTip').remove();
+                },
+                mousedown: function() {
+                    $(this).css('border', '3px solid red');
+                },
+                mouseup: function() {
+                    $(this).css('border', '0px');
+                }
+            });
+
+            $("#photo img").bind({
+                mouseenter: function() {
+                    $(this).attr('src', 'images/img003.jpg');
+                },
+                mouseleave: function() {
+                    $(this).attr('src', 'images/img004.jpg');
+                }
+            });
+
+            $('.slideLink').bind('click', function() {
+               $('#img005').slideToggle();
+            });
+            $('.showLink').bind('click', function() {
+                $('#img005').toggle();
+            });
+            $('.fadeLink').bind('click', function() {
+                $('#img005').fadeToggle();
+            });
+
+            $('.show-tip').hover(
+                function() {
+                    $('.tool-tip').fadeIn(900);
+                },
+                function() {
+                    $('.tool-tip').delay(5000).fadeOut(900);
+                }
+            );
+        });
+
+        $('<img />').attr({'src':'images/img001.jpg', 'id':'img001', 'title':'Dog'}).load(function(){
+            $('#gallery').append($(this));
+        });
+    </script>
+</head>
+<body>
+<div id="gallery"></div>
+<div id="product">
+    <img src="images/img002.jpg" title="Tool Tip" />
+    <p class="info"></p>
+</div>
+<div id="photo">
+    <img src="images/img004.jpg" />
+</div>
+<div id="bind">
+    <a class="bind1">bind1 link</a>
+</div>
+<div id="live">
+    <a class="live1">live1 link</a>
+</div>
+<a href="#" class="showLink">普通</a>&nbsp;<a href="#" class="slideLink">滑动</a>&nbsp;<a href="#" class="fadeLink">淡入淡出</a>
+<div>
+    <img id="img005" src="images/img005.jpg" style="display:none" />
+</div>
+<div>
+    <a href="#" class="show-tip">显示提示</a>
+    <p class="tool-tip" style="display:none">鼠标离开5秒后消失</p>
+</div>
+</body>
+</html>

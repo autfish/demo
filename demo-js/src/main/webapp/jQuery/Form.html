@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Form</title>
+    <link type="text/css" href="css/validate.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="js/jquery.validate.extend.js"></script>
+    <script>
+        $(function () {
+            /* 启用 禁用 */
+            $('#a1').click(function () {
+                $('#t1').attr("disabled", true);
+            });
+            $('#a2').click(function () {
+                $('#t1').attr("disabled", false);
+            });
+
+            /* 默认文本 */
+            var defaultText = "默认文本";
+            $("#t2").bind('focus', function () {
+                if ($(this).val() == defaultText) {
+                    $(this).val('');
+                }
+            });
+            $("#t2").bind('blur', function () {
+                if ($(this).val() == '') {
+                    $(this).val(defaultText);
+                }
+            });
+
+            /* 全选/反选 */
+            $('#checkall').bind('click', function () {
+                var checkboxes = $('#cb-fields input');
+                if (this.checked) {
+                    checkboxes.prop('checked', true);
+                } else {
+                    checkboxes.prop('checked', false);
+                }
+            });
+
+            $('#form1').validate({
+                rules: {
+                    username: {
+                        required: true,
+                        minlength: 4,
+                        maxlength: 30
+                    },
+                    reusername: {
+                        required: true,
+                        equalTo: "#username"
+                    },
+                    amt: {
+                        required: true,
+                        amtCheck: true
+                    }
+                },
+                messages: {
+                    username: {
+                        required: "用户名不能为空",
+                        minlength: "用户名的最小长度为2",
+                        maxlength: "用户名的最大长度为16"
+                    },
+                    reusername: {
+                        required: "确认用户名不能为空",
+                        equalTo: "确认用户名与用户名不一致"
+                    },
+                    amt: {
+                        required: "金额不能为空"
+                    }
+                }
+            });
+        });
+        var options = 1;
+        $(function(){
+            $("#add").click(function(){
+                $("#select_list").append("<option value='" + options + "'>" + options + "</option>");
+                options++;
+                alert($("#select_list option").size());
+            })
+        });
+        $(function(){
+            $("#delete").click(function(){
+                if($("#select_list option:selected").length > 0) {
+                    $("#select_list option:selected").each(function(){
+                        $(this).remove();
+                    })
+                } else {
+                    alert("请选择要删除的分包！");
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<form id="form1" action="#" method="post">
+    <div>
+        <input type="text" id="t1"/><a id="a1">禁用</a>&nbsp;<a id="a2">启用</a>
+    </div>
+    <div>
+        <input type="text" id="t2" value="默认文本"/>
+    </div>
+    <input type="checkbox" id="checkall"/>全选
+    <ul id="cb-fields">
+        <li><input name="check1" type="checkbox"/>1</li>
+        <li><input name="check2" type="checkbox"/>2</li>
+    </ul>
+    <fieldset>
+        <legend>表单验证</legend>
+        <div class="item">
+            <label for="username" class="item-label">用户名:</label>
+            <input id="username" name="username" type="text" placeholder="请输入用户名" class="item-text" tip="请输入用户名" />
+        </div>
+        <div class="item">
+            <label for="reusername" class="item-label">用户名:</label>
+            <input id="reusername" name="reusername" type="text" placeholder="请确认用户名" class="item-text" tip="请确认用户名" />
+        </div>
+        <div class="item">
+            <label for="amt" class="item-label">金额:</label>
+            <input id="amt" name="amt" type="text" placeholder="请输入金额" class="item-text" tip="金额必须大于0, 且最多两位小数" />
+        </div>
+        <div>
+            <input type="submit" class="item-submit" value="提交" />
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>多行列表</legend>
+        <select id="select_list" multiple="multiple" style=" text-align:center;width:300px;height:150px;">
+        </select>
+        <input type="button" id="add" value="添加>>" />
+        <input type="button" id="delete" value="<<删除" />
+    </fieldset>
+</form>
+</body>
+</html>

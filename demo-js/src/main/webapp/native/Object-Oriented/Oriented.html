@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>继承</title>
+    <script>
+        //原型链继承(很少单独使用)
+        function SuperType() {
+            this.name = "super";
+            this.colors = new Array();
+        }
+        SuperType.prototype.getSuperName = function () {
+            return this.name;
+        };
+        function SubType() {
+            this.subName = "sub";
+        }
+        //继承SuperType
+        SubType.prototype = new SuperType();
+        //注意继承后不能再重写原型, 如SubType.prototype = {...}
+        SubType.prototype.getSubName = function () {
+            return this.subName;
+        }
+        var inst1 = new SubType();
+        console.log("继承的方法 inst1.getSuperName()=" + inst1.getSuperName()); //继承的方法
+
+        //重写超类的方法
+        SubType.prototype.getSuperName = function () {
+            return this.subName;
+        };
+        console.log("重写后的方法 inst1.getSuperName()=" + inst1.getSuperName());
+
+        //问题1 不能向超类型的构造函数中传递参数
+        //问题2 超类的实例属性变成原型属性
+        var inst2 = new SubType();
+        inst1.colors.push("red");
+        console.log("inst2.colors=" + inst2.colors); //red
+        console.log("---------------------------------------------");
+
+        /*---------------------------------------------*/
+        //借用构造函数(很少单独使用)
+        function Father(name) {
+            this.name = name;
+            this.colors = new Array();
+        }
+        Father.prototype.getName = function () {
+            return this.name;
+        };
+        function Child(name) {
+            Father.call(this, name);
+        }
+        inst1 = new Child("child");
+        console.log("继承的属性 inst1.name=" + inst1.name);
+        //console.log(inst1.getName()); //问题 无法继承函数
+        inst2 = new Child("inst2");
+        inst1.colors.push("red");
+        inst2.colors.push("blue");
+        console.log("inst2.colors=" + inst2.colors); //blue
+        console.log("---------------------------------------------");
+
+        /*---------------------------------------------*/
+        //组合继承(常用方式)
+        function Dad(name) {
+            this.name = name;
+            this.colors = new Array();
+        }
+        Dad.prototype.sayName = function () {
+            console.log(this.name);
+        }
+        function Son(name, age) {
+            Dad.call(this, name);
+            this.age = age;
+        }
+        Son.prototype = new Dad();
+        Son.prototype.constructor = Son;
+        Son.prototype.sayAge = function () {
+            console.log(this.age);
+        }
+
+        inst1 = new Son("Nicholas", 29);
+        inst1.colors.push("red");
+        inst2 = new Son("Greg", 27);
+        inst2.colors.push("blue");
+        console.log("inst1.colors=" + inst1.colors);
+        inst1.sayName();
+        inst1.sayAge();
+
+        console.log("inst2.colors=" + inst2.colors);
+        inst2.sayName();
+        inst2.sayAge();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

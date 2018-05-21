@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跨文档消息传送</title>
+    <script>
+        function Send() {
+            var iframeWindow = document.getElementById("iframeWindow").contentWindow;
+            iframeWindow.postMessage(document.getElementById("myMsg").value, "*");
+        }
+    </script>
+</head>
+<body>
+<input id="myMsg" type="text" /><input type="button" value="发送" onclick="Send()" />
+<iframe id="iframeWindow" src="_Recv.html" width="200" height="200" /><br />
+
+</body>
+</html>

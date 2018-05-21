@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+    <script>
+        window.onload = function() {
+            var drawing = document.getElementById("drawing");
+            if(drawing.getContext) {
+                var context = drawing.getContext("2d");
+
+                //绘制矩形
+                context.fillStyle = "#ff0000";
+                context.fillRect(10, 10, 50, 50);
+                //绘制半透明矩形
+                context.fillStyle = "rgba(0, 0, 255, 0.5";
+                context.fillRect(30, 30, 50, 50);
+                //清除区域
+                context.clearRect(40, 40, 10, 10);
+                //描边矩形
+                context.strokeStyle = "#ff0000";
+                context.strokeRect(90, 10, 50, 50);
+
+                //圆形
+                context.beginPath();
+                context.arc(200, 200, 99, 0, 2 * Math.PI, false);
+                context.moveTo(194, 100);
+                context.arc(200, 200, 94, 0, 2 * Math.PI, false);
+                context.stroke();
+            }
+        }
+    </script>
+</head>
+<body>
+<canvas id="drawing" width="600" height="600"></canvas>
+</body>
+</html>

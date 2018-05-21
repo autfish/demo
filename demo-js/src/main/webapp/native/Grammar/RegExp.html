@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RegExp</title>
+    <script>
+        var text = "cat, bat, sat, fat";
+        var pattern1 = /.at/; //无全局标志
+        var pattern2 = /.at/g;
+
+        var matches = pattern1.exec(text);
+        console.log("pattern1.test(text)=" + pattern1.test(text));
+        console.log("pattern1.exec(text)");
+        console.log("matches.index=" + matches.index);
+        console.log("matches.length=" + matches.length);
+        console.log("matches[0]=" + matches[0]);
+        console.log("pattern1.lastIndex=" + pattern1.lastIndex); //开始搜索下一个匹配项的位置
+
+        matches = pattern1.exec(text);
+        console.log("pattern1.exec(text)");
+        console.log("matches.index=" + matches.index);
+        console.log("matches.length=" + matches.length);
+        console.log("matches[0]=" + matches[0]);
+        console.log("pattern1.lastIndex=" + pattern1.lastIndex);
+        console.log("---------------------------------------------");
+
+        matches = pattern2.exec(text);
+        console.log("pattern2.exec(text)");
+        console.log("matches.index=" + matches.index);
+        console.log("matches.length=" + matches.length);
+        console.log("matches[0]=" + matches[0]);
+        console.log("pattern2.lastIndex=" + pattern2.lastIndex); //开始搜索下一个匹配项的位置
+
+        matches = pattern2.exec(text);
+        console.log("pattern1.exec(text)");
+        console.log("matches.index=" + matches.index);
+        console.log("matches.length=" + matches.length);
+        console.log("matches[0]=" + matches[0]);
+        console.log("pattern2.lastIndex=" + pattern2.lastIndex);
+        console.log("---------------------------------------------");
+
+        text = "this has been a short summer";
+        var pattern = /(.)hort/g;
+        if(pattern.test(text)) {
+            console.log("RegExp.input=" + RegExp.input);
+            console.log("RegExp.lastMatch=" + RegExp.lastMatch);
+            console.log("RegExp.leftContext=" + RegExp.leftContext); //lastMatch之前的文本
+            console.log("RegExp.rightContext=" + RegExp.rightContext); //lastMatch之后的文本
+            console.log("RegExp.lastParen=" + RegExp.lastParen);
+            console.log("RegExp.multiple=" + RegExp.multiple);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

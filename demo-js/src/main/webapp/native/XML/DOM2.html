@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XML DOM2</title>
+    <script>
+        var hasXmlDom = document.implementation.hasFeature("XML", "2.0");
+        console.log('hasFeature("XML", "2.0")=' + hasXmlDom);
+
+        function parseXml(xml) {
+            var xmldom = null;
+            if(typeof DOMParser != "undefined") {
+                xmldom = new DOMParser().parseFromString(xml, "text/xml");
+                var errors = xmldom.getElementsByTagName("parseerror");
+                if(errors.length) {
+                    throw new Error("XML parsing error:" + errors[0].textContent);
+                }
+            } else if(typeof ActiveXObject != "undefined") {
+                xmldom = createDocument();
+                xmldom.loadXML(xml);
+                if(xmldom.parseError != 0) {
+                    throw new Error("XML parsing error:" + xmldom.parseError.reason);
+                }
+            } else {
+                throw new Error("No XML parse available.");
+            }
+            return xmldom;
+        }
+
+        try {
+            var xmldom = parseXml("<root><child /></root>");
+            console.log("xmldom.documentElement.tagName=" + xmldom.documentElement.tagName);
+            console.log("xmldom.documentElement.firstChild.tagName=" + xmldom.documentElement.firstChild.tagName);
+
+            var anotherChild = xmldom.createElement("child");
+            xmldom.documentElement.appendChild(anotherChild);
+            var children = xmldom.getElementsByTagName("child");
+            console.log("children.length=" + children.length);
+
+            var serializer = new XMLSerializer();
+            var xml = serializer.serializeToString(xmldom);
+            console.log("serializer.serializeToString(xmldom)=" + xml);
+        } catch(error) {
+            console.log(error.message);
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

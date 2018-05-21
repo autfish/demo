@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Selectors</title>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script>
+        $(function() {
+            //$('*')
+            //byTagName $('p')
+            $('p').text("Name: Tom");
+            $('td').css('border', '1px solid #ccc');
+
+            //byClassName $('.class')
+            $('.phone').text("Phone: 8888");
+            $('.favorite.inactive').css('display', 'none');
+
+            //byId $('#id')
+            $('#div1').text("Age: 20");
+
+            //子元素选择
+            //直接子元素$('.parent > p') 所有后代元素$('.parent p')
+            $('#friends > div').css("color", 'red');
+            $('#friends div').css("font-size", '12px');
+
+            //组合使用
+            $('#div1, .favorite, p').css('background', '#ccc');
+
+            //过滤器
+            $('tr:even').css('background', '#dedede');
+            $('tr:odd').css('background', '#ffffff');
+        });
+    </script>
+</head>
+<body>
+<p></p>
+<div id="div1"></div>
+<div class="phone"></div>
+<div class="favorite inactive">Running</div>
+<div class="favorite active">Football</div>
+<div id="friends">
+    <div>Monica</div>
+    <div>John</div>
+    <strong><div>Mike</div></strong>
+</div>
+<table style="width: 100%;">
+    <tr><td style="width:200px">:even, :odd</td><td>匹配结果集中顺序为偶数或奇数的元素</td></tr>
+    <tr><td>:header</td><td>匹配标题元素H1、H2、H3等标签</td></tr>
+    <tr><td>:not</td><td>不匹配后面选择器的元素</td></tr>
+    <tr><td>:eq(index)</td><td>匹配顺序号等于index的元素</td></tr>
+    <tr><td>:gt(index)</td><td>匹配顺序号大于index的元素</td></tr>
+    <tr><td>:lt(index)</td><td>匹配顺序号小于index的元素</td></tr>
+    <tr><td>:first-child</td><td>匹配第一个子元素</td></tr>
+    <tr><td>:last-child</td><td>匹配最后一个子元素</td></tr>
+    <tr><td>:only-child</td><td>匹配唯一的子元素</td></tr>
+    <tr><td>:nth-child(index)</td><td>匹配第index个子元素</td></tr>
+    <tr><td>:has(p)</td><td>匹配包含p元素的元素</td></tr>
+    <tr><td>:contains('some text')</td><td>匹配包含some text文本的元素</td></tr>
+    <tr><td>:empty</td><td>匹配无内容的元素</td></tr>
+    <tr><td>:parent</td><td>匹配拥有子元素的元素</td></tr>
+    <tr><td>:hidden</td><td>匹配不可见的元素</td></tr>
+    <tr><td>:visible</td><td>匹配可见的元素</td></tr>
+    <tr><td>:animated</td><td>匹配正处于动画过程中的元素</td></tr>
+    <tr><td>&nbsp;</td><td></td></tr>
+    <tr><td>$('[attribute*=value]')</td><td>attribute like %value%'</td></tr>
+    <tr><td>$('[attribute|=value]')</td><td>attribute=value或attribute like value-%</td></tr>
+    <tr><td>$('[attribute~=value]')</td><td>value由多个子串组成以空格分隔, attribute包含任意一个子串</td></tr>
+    <tr><td>$('[attribute^=value]')</td><td>attribute like value%</td></tr>
+    <tr><td>$('[attribute=value]')</td><td>attribute=value</td></tr>
+    <tr><td>$('[attribute$=value]')</td><td>attribute like %value</td></tr>
+    <tr><td>$('[attribute!=value]')</td><td>attribute不等于value</td></tr>
+    <tr><td>$('[attribute1=value1][attribute2=value2]')</td><td>同时匹配多个属性及其值</td></tr>
+</table>
+</body>
+</html>

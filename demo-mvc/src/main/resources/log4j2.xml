@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="1800">
+	<properties>
+		<property name="LOG_HOME">${log4j2.log.path}</property>
+		<property name="SYSTEM_FILE_NAME">system</property>
+		<property name="ERROR_FILE_NAME">error</property>
+	</properties>
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+		<RollingRandomAccessFile name="system-log"
+			fileName="${LOG_HOME}/${SYSTEM_FILE_NAME}.log"
+			filePattern="${LOG_HOME}/$${date:yyyy-MM}/${SYSTEM_FILE_NAME}-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout
+				pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+		</RollingRandomAccessFile>
+		
+		<RollingRandomAccessFile name="error-log"
+			fileName="${LOG_HOME}/${ERROR_FILE_NAME}.log"
+			filePattern="${LOG_HOME}/$${date:yyyy-MM}/${ERROR_FILE_NAME}-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout
+				pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+		</RollingRandomAccessFile>
+	</Appenders>
+
+	<Loggers>
+		<Logger name="system" level="trace"
+			additivity="true">
+			<AppenderRef ref="system-log" />
+		</Logger>
+		<Logger name="error" level="debug"
+			additivity="true">
+			<AppenderRef ref="error-log" />
+		</Logger>
+		<Root level="trace">
+			<AppenderRef ref="system-log" />
+		</Root>
+		<Logger name="org.springframework.web.context.ContextLoader">
+			<AppenderRef ref="system-log" />
+		</Logger>
+	</Loggers>
+</Configuration>

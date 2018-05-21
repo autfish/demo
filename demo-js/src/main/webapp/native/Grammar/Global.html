@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Global对象</title>
+    <script>
+        var global = function() {
+            return this;
+        }();
+        console.log("Global=" + global);
+
+        var uri = "http://www.wrox.com/illegal value.htm#start";
+        console.log('uri = "http://www.wrox.com/illegal value.htm#start"');
+
+        var encodeUri = encodeURI(uri);
+        console.log("encodeURI(uri)=" + encodeUri);
+        console.log("decodeURI(uri)=" + decodeURI(encodeUri));
+
+        var encodeURIComponentUri = encodeURIComponent(uri);
+        console.log("encodeURIComponent(uri)=" + encodeURIComponentUri);
+        console.log("decodeURIComponent(uri)=" + decodeURIComponent(encodeURIComponentUri));
+
+        //eval ECMAScript解析器, 接收一个参数, 即要执行的JavaScript字符串
+        var msg = "hello world";
+        eval("console.log(msg)");
+        eval("function sayHi() { console.log('hi'); }");
+        sayHi();
+    </script>
+</head>
+<body>
+
+</body>
+</html>
