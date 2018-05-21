@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,8 @@ import com.autfish.demo.domain.Goods;
 @Controller
 @RequestMapping("/mapping")
 public class MappingController {
+
+	Logger logger = LogManager.getLogger(MappingController.class);
 
 	@RequestMapping(value = { "/standard", "/second" })
 	public void standard(HttpServletResponse resp) throws IOException {
@@ -118,5 +121,24 @@ public class MappingController {
 		map.put("name", requestBody.getName());
 		map.put("price", requestBody.getPrice());
 		return map;
+	}
+
+	@RequestMapping("/log") //跳转到error.jsp
+	@ResponseBody
+	public String log() {
+		logger.trace("trace");
+		logger.debug("debug");
+		logger.info("info");
+		logger.warn("warn");
+		logger.error("error");
+		logger.fatal("fatal");
+		return "ok";
+	}
+
+	@RequestMapping("/toError") //跳转到error.jsp
+	@ResponseBody
+	public String toError() throws IOException {
+		int x = 3 / 0;
+		return "value is " + x;
 	}
 }

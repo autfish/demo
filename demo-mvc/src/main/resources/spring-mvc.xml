@@ -55,6 +55,13 @@
 		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 	<bean id="xmlAwareFormHttpMessageConverter"
 		class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" />
+
+	<bean class="com.autfish.demo.support.LoggingExceptionResolver">
+		<property name="defaultErrorView" value="/error" />
+		<property name="exceptionAttribute" value="ex" />
+		<property name="warnLogCategory" value="TRACE" />
+	</bean>
+
 	<mvc:interceptors>
 	    <mvc:interceptor>
 	        <mvc:mapping path="/goods/**" />

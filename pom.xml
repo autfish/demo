@@ -323,7 +323,7 @@
                 <log4j2.log.path>D:/Logs</log4j2.log.path>
                 <dataSource.jdbcUrl>jdbc:mysql://localhost:3306/test?useUnicode=true&amp;amp;characterEncoding=UTF8</dataSource.jdbcUrl>
                 <dataSource.user>root</dataSource.user>
-                <dataSource.password>root123456</dataSource.password>
+                <dataSource.password>root1234567</dataSource.password>
                 <debug.value>dev</debug.value>
             </properties>
         </profile>
