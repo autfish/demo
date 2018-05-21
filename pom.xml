@@ -12,6 +12,7 @@
         <module>demo-usage</module>
         <module>demo-js</module>
         <module>demo-mvc</module>
+        <module>demo-console</module>
     </modules>
 
     <name>demo</name>
