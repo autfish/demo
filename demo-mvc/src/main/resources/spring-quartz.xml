@@ -21,7 +21,7 @@
     </bean>
 
     <bean id="systemConfig" class="com.autfish.demo.commons.SystemConfig" >
-        <constructor-arg value="D:\JAVA\IDEA\web-examples\target\classes\system.properties"/>
+        <constructor-arg value="classpath:system.properties"/>
     </bean>
 
     <bean id="refreshConfigJobDetail"

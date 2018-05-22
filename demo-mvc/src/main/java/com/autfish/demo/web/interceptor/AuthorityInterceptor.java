@@ -23,7 +23,6 @@ public class AuthorityInterceptor implements HandlerInterceptor {
 			Object handler) throws Exception {
 		String backUrl = request.getServletPath();
 		String sessionName = "adminUser";
-		System.out.println(request.getSession(true).getAttribute(sessionName));
 		if (request.getSession(true).getAttribute(sessionName) == null) {
 			response.sendRedirect(request.getContextPath() + "/login?backUrl=" + backUrl);
 			return false;
