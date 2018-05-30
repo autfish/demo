@@ -2,12 +2,13 @@ package com.autfish.demo.domain;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class Person implements Serializable {
 
     private int id;
     private String name;
     private String sex;
     private int age;
+    private int cardId;
 
     public int getId() {
         return id;
@@ -39,5 +40,13 @@ public class User implements Serializable {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(int cardId) {
+        this.cardId = cardId;
     }
 }
