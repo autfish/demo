@@ -26,17 +26,9 @@ public class MappingController {
 
 	Logger logger = LogManager.getLogger(MappingController.class);
 
-	@Autowired
-	private UserService userService;
-
 	@RequestMapping(value = { "/standard", "/second" })
 	public void standard(HttpServletResponse resp) throws IOException {
 		resp.getWriter().write("standard");
-	}
-
-	@RequestMapping(value = { "/user" })
-	public void user(HttpServletResponse resp) throws IOException {
-		resp.getWriter().write(ToStringBuilder.reflectionToString(userService.findWithLoginName("admin")));
 	}
 
 	// Ant风格 * 匹配一层路径

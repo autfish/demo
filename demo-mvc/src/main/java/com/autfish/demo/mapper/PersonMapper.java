@@ -1,14 +1,14 @@
 package com.autfish.demo.mapper;
 
 import com.autfish.demo.domain.Person;
-import org.apache.ibatis.annotations.One;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
 
+import java.util.List;
+import java.util.Map;
+
 /**
- * OneToOne Mybatis演示
+ * Mybatis演示
  */
 public interface PersonMapper {
 
@@ -18,9 +18,18 @@ public interface PersonMapper {
             @Result(column = "name", property = "name"),
             @Result(column = "sex", property = "sex"),
             @Result(column = "age", property = "age"),
-            @Result(column = "cardId", property = "cardId",
+            @Result(column = "cardId", property = "card",
                     one = @One(select = "com.autfish.demo.mapper.CardMapper.selectCardById", fetchType = FetchType.EAGER
-                    ))
+                    )),
+            @Result(column = "id", property = "friends",
+                    many = @Many(select = "com.autfish.demo.mapper.PersonMapper.selectFriendsByPersonId", fetchType = FetchType.LAZY
+                    )),
     })
     Person selectPersonById(Integer id);
+
+    @Select("SELECT * FROM t_person WHERE ID in(SELECT friendId FROM t_friend WHERE personId=#{id})")
+    List<Person> selectFriendsByPersonId(Integer id);
+
+    @SelectProvider(type = PersonDynaSqlProvider.class, method = "selectWithParam")
+    List<Person> selectWithParam(Map<String, Object> param);
 }

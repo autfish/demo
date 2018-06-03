@@ -1,6 +1,7 @@
 package com.autfish.demo.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Person implements Serializable {
 
@@ -8,7 +9,8 @@ public class Person implements Serializable {
     private String name;
     private String sex;
     private int age;
-    private int cardId;
+    private Card card;
+    private List<Person> friends;
 
     public int getId() {
         return id;
@@ -42,11 +44,19 @@ public class Person implements Serializable {
         this.age = age;
     }
 
-    public int getCardId() {
-        return cardId;
+    public Card getCard() {
+        return card;
     }
 
-    public void setCardId(int cardId) {
-        this.cardId = cardId;
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
+    public List<Person> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<Person> friends) {
+        this.friends = friends;
     }
 }
