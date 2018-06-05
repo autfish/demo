@@ -2,6 +2,7 @@ package com.autfish._spring.step08.transaction.annotation;
 
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,9 +25,10 @@ import org.springframework.transaction.annotation.Transactional;
  * noRollbackFor: 遇到哪些类型异常不回滚, 如noRollbackFor={SQLException.class,...}
  * noRollbackForClassName: 遇到哪些类型异常不回滚, 如noRollbackForClassName={"SQLException",...}
  */
-@Transactional("user")
+@Transactional
 public class UserServiceImpl implements UserService {
-	
+
+	@Autowired
 	private UserDao userDao;
 
 	public void setUserDao(UserDao userDao) {

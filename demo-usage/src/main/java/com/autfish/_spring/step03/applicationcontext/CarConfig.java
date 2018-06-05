@@ -1,11 +1,11 @@
 package com.autfish._spring.step03.applicationcontext;
 
-import com.autfish._spring.step02.beanfactory.Car;
+import com.autfish._spring.Car;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
-public class Beans {
+@Configuration //声明当前类是一个配置类
+public class CarConfig {
 
 	@Bean(name = "car3")
 	public Car buildCar() {

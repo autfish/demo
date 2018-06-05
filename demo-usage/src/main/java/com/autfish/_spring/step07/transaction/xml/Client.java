@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Client {
 
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("_spring/step07/transaction/xml/applicationContext.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("_spring/step07/transaction.xml");
 		UserService userService = (UserService)context.getBean("userService");
 		userService.addUser("jack");
 	}

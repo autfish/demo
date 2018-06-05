@@ -1,5 +1,6 @@
 package com.autfish._spring.step05.custom_editor;
 
+import com.autfish._spring.Boss;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

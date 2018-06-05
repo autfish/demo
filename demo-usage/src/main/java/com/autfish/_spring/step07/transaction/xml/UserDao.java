@@ -2,10 +2,14 @@ package com.autfish._spring.step07.transaction.xml;
 
 import java.sql.Types;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
+@Repository("userDao")
 public class UserDao {
 
+	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {

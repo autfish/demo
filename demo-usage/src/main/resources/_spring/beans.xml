@@ -20,7 +20,7 @@
 		<context:exclude-filter type="aspectj" expression="_spring.step04..*Controller+" />
 	</context:component-scan>
 
-	<bean id="car1" class="_spring.step04.beans.Car" init-method="init" destroy-method="destroy" lazy-init="true">
+	<bean id="car1" class="com.autfish._spring.Car" init-method="init" destroy-method="destroy" lazy-init="true">
 		<constructor-arg index="0" type="java.lang.String"
 			value="roewe"></constructor-arg>
 		<constructor-arg index="1" type="java.lang.String"
@@ -28,45 +28,45 @@
 		<constructor-arg index="2" type="int" value="200"></constructor-arg>
 	</bean>
 
-	<bean id="car2" class="_spring.step04.beans.Car">
+	<bean id="car2" class="com.autfish._spring.Car">
 		<property name="brand" value="roewe"></property>
 	</bean>
 
-	<bean id="boss1" class="_spring.step04.beans.Boss">
+	<bean id="boss1" class="com.autfish._spring.Boss">
 		<constructor-arg ref="car1" />
 	</bean>
 
 	<!-- 内部bean -->
-	<bean id="boss2" class="_spring.step04.beans.Boss">
+	<bean id="boss2" class="com.autfish._spring.Boss">
 		<property name="car">
-			<bean class="_spring.step04.beans.Car">
+			<bean class="com.autfish._spring.Car">
 				<property name="brand" value="roewe"></property>
 			</bean>
 		</property>
 	</bean>
 
 	<!-- 工厂方法 -->
-	<bean id="carFactory" class="_spring.step04.beans.CarFactory" />
-	<bean id="car3" factory-bean="carFactory" factory-method="createCar" />
+	<bean id="carFactory" class="com.autfish._spring.step04.beans.CarFactory1" />
+	<bean id="car3" factory-bean="carFactory" factory-method="createHongqiCar" />
 
 	<!-- 静态工厂方法 -->
-	<bean id="car4" class="_spring.step04.beans.StaticCarFactory"
-		factory-method="createCar" />
+	<bean id="car4" class="com.autfish._spring.step04.beans.CarFactory2"
+		factory-method="createHongqiCar" />
 
 	<!-- null -->
-	<bean id="car5" class="_spring.step04.beans.Car">
+	<bean id="car5" class="com.autfish._spring.Car">
 		<property name="brand">
 			<null />
 		</property>
 	</bean>
 
 	<!-- 级联属性 -->
-	<bean id="boss3" class="_spring.step04.beans.Boss">
+	<bean id="boss3" class="com.autfish._spring.Boss">
 		<property name="car.brand" value="roewe"></property>
 	</bean>
 
 	<!-- List -->
-	<bean id="boss4" class="_spring.step04.beans.Boss">
+	<bean id="boss4" class="com.autfish._spring.Boss">
 		<property name="favorites">
 			<list>
 				<value>看报</value>
@@ -76,7 +76,7 @@
 	</bean>
 
 	<!-- Set -->
-	<bean id="boss5" class="_spring.step04.beans.Boss">
+	<bean id="boss5" class="com.autfish._spring.Boss">
 		<property name="favorites">
 			<set>
 				<value>看报</value>
@@ -86,12 +86,13 @@
 	</bean>
 
 	<!-- Map -->
-	<bean id="boss6" class="_spring.step04.beans.Boss">
+	<bean id="boss6" class="com.autfish._spring.Boss">
 		<property name="jobs">
 			<map>
 				<entry key="AM" value="会见客户"></entry>
 				<entry key="PM" value="内部会议"></entry>
-				<entry key-ref="keyBean" value-ref="valueBean"></entry>
+				<!-- 如果key和value都是对象 -->
+				<!--<entry key-ref="keyBean" value-ref="valueBean"></entry> -->
 			</map>
 		</property>
 	</bean>
@@ -103,31 +104,28 @@
 	</util:list>
 	
 	<!-- 使用p命名空间 -->
-	<bean id="car6" class="_spring.step04.beans.Car" p:brand="roewe" />
-	<bean id="boss7" class="_spring.step04.beans.Boss" p:car-ref="car6" />
+	<bean id="car6" class="com.autfish._spring.Car" p:brand="roewe" />
+	<bean id="boss7" class="com.autfish._spring.Boss" p:car-ref="car6" />
 	
 	<!-- lookup方法注入(需要用到CGLib类包) -->
-	<bean id="car7" class="_spring.step04.beans.Car" p:brand="roewe" scope="protetype" />
-	<bean id="boss8" class="_spring.step04.beans.Boss">
+	<bean id="car7" class="com.autfish._spring.Car" p:brand="roewe" scope="prototype" />
+	<bean id="boss8" class="com.autfish._spring.Boss">
 		<lookup-method name="getCar" bean="car7" />
 	</bean>
 	
 	<!-- 继承 -->
-	<bean id="abstractCar" class="_spring.step04.beans.Car" p:brand="roewe" p:price="2000" p:color="黑色" abstract="true" />
+	<bean id="abstractCar" class="com.autfish._spring.Car" p:brand="roewe" p:maxSpeed="2000" p:color="黑色" abstract="true" />
 	<bean id="car8" p:color="红色" parent="abstractCar" />
 	
 	<!-- 依赖 -->
-	<bean id="boss9" class="_spring.step04.beans.Boss" depends-on="car8" />
-	<bean id="car9" class="_spring.step04.beans.Car" p:brand="roewe" />
-	
-	<!-- 引用  -->
-	<bean id="car10" class="_spring.step04.beans.Car" p:brand="roewe" />
-	<bean id="boss10" class="_spring.step04.beans.Boss">
-		<property name="car">
-			<idref local="car10" />
-		</property>
-	</bean>
+	<bean id="boss9" class="com.autfish._spring.Boss" depends-on="car9" />
+	<bean id="car9" class="com.autfish._spring.Car" p:brand="roewe" />
 	
 	<!-- 组合其他配置文件 -->
-	<import resource="classpath:_sprint/step04/beans/beans2.xml" />
+	<import resource="classpath:_spring/simple.xml" />
+
+	<!-- CarEditor -->
+	<bean id="boss" class="com.autfish._spring.Boss">
+		<property name="car" value="audi,240,240000" />
+	</bean>
 </beans>

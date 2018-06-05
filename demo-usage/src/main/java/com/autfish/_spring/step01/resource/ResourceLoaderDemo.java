@@ -13,7 +13,7 @@ public class ResourceLoaderDemo {
 
 	public static void main(String[] args) throws IOException {
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		Resource[] ress = resolver.getResources("classpath*:_spring/step01/resource/test.xml");
+		Resource[] ress = resolver.getResources("classpath*:_spring/simple.xml");
 		for(Resource res : ress) {
 			System.out.println(res.getDescription());
 		}
