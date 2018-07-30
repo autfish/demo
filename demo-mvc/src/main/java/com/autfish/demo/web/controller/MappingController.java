@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,21 +23,14 @@ import com.autfish.demo.domain.Goods;
  */
 @Controller
 @RequestMapping("/mapping")
+@PropertySource("classpath:system.properties")
 public class MappingController {
 
 	Logger logger = LogManager.getLogger(MappingController.class);
 
-	@Autowired
-	private UserService userService;
-
 	@RequestMapping(value = { "/standard", "/second" })
 	public void standard(HttpServletResponse resp) throws IOException {
 		resp.getWriter().write("standard");
-	}
-
-	@RequestMapping(value = { "/user" })
-	public void user(HttpServletResponse resp) throws IOException {
-		resp.getWriter().write(ToStringBuilder.reflectionToString(userService.findWithLoginName("admin")));
 	}
 
 	// Ant风格 * 匹配一层路径

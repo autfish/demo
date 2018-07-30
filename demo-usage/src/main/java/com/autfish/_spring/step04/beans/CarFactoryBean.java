@@ -1,5 +1,6 @@
 package com.autfish._spring.step04.beans;
 
+import com.autfish._spring.Car;
 import org.springframework.beans.factory.FactoryBean;
 
 public class CarFactoryBean implements FactoryBean<Car> {
@@ -18,6 +19,10 @@ public class CarFactoryBean implements FactoryBean<Car> {
 		car.setColor(infos[1]);
 		car.setMaxSpeed(Integer.parseInt(infos[2]));
 		return car;
+	}
+
+	public Car createCar() {
+		return new Car();
 	}
 
 	@Override

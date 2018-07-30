@@ -7,16 +7,7 @@
   http://www.springframework.org/schema/context
   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<bean id="utf8" class="java.lang.String">
-		<constructor-arg value="utf-8"></constructor-arg>
-	</bean>
-	<context:property-placeholder
-		location="classpath:_spring/step04/beans/jdbc.properties"
-		file-encoding="utf8" />
+	<bean class="com.autfish._spring.step06.event.MailSendListener" />
+	<bean id="mailSender" class="com.autfish._spring.step06.event.MailSender" />
 
-	<bean id="carX" class="_spring.step04.beans.CarFactoryBean"
-		p:carInfo="audi,white,240" />
-
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
-		p:driverClassName="${driverClassName}" />
 </beans>

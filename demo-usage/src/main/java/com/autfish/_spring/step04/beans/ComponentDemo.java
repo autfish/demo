@@ -7,11 +7,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Scope("prototype")
-@Component("componentDemo")
+@Component("componentDemo")  //声明当前类是一个Bean, 其他类似注解 @Repository @Service @Controller
 public class ComponentDemo {
-
-	//等同于<bean id="componentDemo" class="_spring.step04.beans.ComponentDemo" />
-	//其他类似注解 @Repository @Service @Controller
 	
 	@PostConstruct //init-method
 	private void init1() {

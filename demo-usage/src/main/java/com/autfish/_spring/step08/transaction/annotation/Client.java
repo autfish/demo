@@ -7,7 +7,7 @@ import org.springframework.dao.DuplicateKeyException;
 public class Client {
 
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("_spring/step08/transaction/annotation/applicationContext.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("_spring/transaction.annotation.xml");
 		UserService userService = (UserService)context.getBean("userService");
 		try {
 			userService.addUser("mike");

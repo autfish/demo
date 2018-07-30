@@ -1,5 +1,6 @@
 package com.autfish._spring.step02.beanfactory;
 
+import com.autfish._spring.Car;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
@@ -13,7 +14,7 @@ public class BeanFactoryTest {
 
 	public static void main(String[] args) {
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		Resource res = resolver.getResource("classpath:_spring/step02/beanfactory/beans.xml");
+		Resource res = resolver.getResource("classpath:_spring/simple.xml");
 		BeanFactory bf = new XmlBeanFactory(res);
 		
 		Car car = bf.getBean("car1", Car.class);

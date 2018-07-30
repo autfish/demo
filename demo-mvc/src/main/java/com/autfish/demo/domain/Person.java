@@ -1,13 +1,16 @@
 package com.autfish.demo.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class User implements Serializable {
+public class Person implements Serializable {
 
     private int id;
     private String name;
     private String sex;
     private int age;
+    private Card card;
+    private List<Person> friends;
 
     public int getId() {
         return id;
@@ -39,5 +42,21 @@ public class User implements Serializable {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
+    public List<Person> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<Person> friends) {
+        this.friends = friends;
     }
 }

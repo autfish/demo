@@ -4,6 +4,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
   http://www.springframework.org/schema/tx
@@ -11,13 +12,20 @@
   http://www.springframework.org/schema/context
   http://www.springframework.org/schema/context/spring-context-3.0.xsd
   http://mybatis.org/schema/mybatis-spring
-  http://mybatis.org/schema/mybatis-spring.xsd">
+  http://mybatis.org/schema/mybatis-spring.xsd
+  http://www.springframework.org/schema/task
+  http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
     <import resource="spring-datasource.xml"/>
-    <import resource="spring-quartz.xml"/>
 
+    <context:annotation-config />
+    <context:component-scan base-package="com.autfish.demo"/>
+
+    <task:executor id="executor" pool-size="1000"/>
+    <task:scheduler id="scheduler" pool-size="10"/>
+    <task:annotation-driven executor="executor" scheduler="scheduler" mode="proxy"/>
     <!-- mybatis -->
-    <mybatis:scan base-package="com.autfish.demo.mapper" />
+    <mybatis:scan base-package="com.autfish.demo.mapper"/>
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
     </bean>
