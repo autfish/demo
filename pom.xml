@@ -13,6 +13,7 @@
         <module>demo-js</module>
         <module>demo-mvc</module>
         <module>demo-console</module>
+        <module>demo-mvc-zero</module>
     </modules>
 
     <name>demo</name>
