@@ -6,13 +6,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.autfish.demo.service.UserService;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +29,25 @@ public class MappingController {
 	@RequestMapping(value = { "/standard", "/second" })
 	public void standard(HttpServletResponse resp) throws IOException {
 		resp.getWriter().write("standard");
+	}
+
+	//仅匹配GET请求
+	@GetMapping("/get")
+	public void getOnly(HttpServletResponse resp) throws IOException {
+		resp.getWriter().write("get");
+	}
+
+	//请求的HTTP 头的Content-Type 媒体类型与consumes 的值匹配
+	//如ajax设置  contentType:"application/son",
+	@GetMapping(value = "/consumes", consumes = "application/json")
+	public void consumes(HttpServletResponse resp) throws IOException {
+		resp.getWriter().write("consumes");
+	}
+
+	//produces 属性对应于HTTP 请求的Accept 字段, 只有匹配得上的方法才能被调用
+	@GetMapping(value = "/produces", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public void produces(HttpServletResponse resp) throws IOException {
+		resp.getWriter().write("produces");
 	}
 
 	// Ant风格 * 匹配一层路径
