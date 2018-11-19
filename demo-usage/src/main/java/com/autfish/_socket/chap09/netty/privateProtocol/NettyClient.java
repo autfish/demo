@@ -121,23 +121,3 @@ public class NettyClient implements Runnable {
 	}
 }
 
-class MessageClientHandler extends ChannelHandlerAdapter {
-
-	@Override
-	public void channelActive(ChannelHandlerContext ctx) {
-	}
-
-	@Override
-	public void channelRead(ChannelHandlerContext ctx, Object in)
-			throws Exception {
-		Message msg = (Message) in;
-		System.out.println("msg: " + msg.getMessageNum());
-		System.out.println("message: " + msg.readString());
-	}
-
-	@Override
-	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-		cause.printStackTrace();
-		ctx.close();
-	}
-}

@@ -1,12 +1,7 @@
 package com.autfish._socket.chap09.netty.privateProtocol;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerAdapter;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -37,6 +32,7 @@ public class NettyServer {
 					@Override
 					public void initChannel(SocketChannel ch)
 							throws IOException {
+						//lengthFieldOffset 长度字段开始位置  lengthFieldLength 长度字段占用字节
 						ch.pipeline().addLast(new MessageDecoder(1024 * 1024, 4, 4));
 						ch.pipeline().addLast(new MessageEncoder());
 						ch.pipeline().addLast("readTimeoutHandler", new ReadTimeoutHandler(50));
@@ -52,7 +48,7 @@ public class NettyServer {
 		future.channel().closeFuture().sync();
 	}
 	
-	private class MessageHandler extends ChannelHandlerAdapter {
+	private class MessageHandler extends ChannelInboundHandlerAdapter {
 		
 		@Override
 		public void channelRead(ChannelHandlerContext ctx, Object in) throws UnsupportedEncodingException {

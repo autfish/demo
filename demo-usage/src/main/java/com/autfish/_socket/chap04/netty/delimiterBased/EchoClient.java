@@ -3,12 +3,7 @@ package com.autfish._socket.chap04.netty.delimiterBased;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerAdapter;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -50,7 +45,7 @@ public class EchoClient {
 	}
 }
 
-class EchoClientHandler extends ChannelHandlerAdapter {
+class EchoClientHandler extends ChannelInboundHandlerAdapter {
 	private int counter;
 	
 	private byte[] req;

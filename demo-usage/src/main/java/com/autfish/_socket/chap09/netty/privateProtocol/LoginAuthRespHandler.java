@@ -1,6 +1,5 @@
 package com.autfish._socket.chap09.netty.privateProtocol;
 
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.net.InetSocketAddress;
@@ -8,8 +7,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.autfish._socket.Message;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class LoginAuthRespHandler extends ChannelHandlerAdapter {
+public class LoginAuthRespHandler extends ChannelInboundHandlerAdapter {
 
 	private Map<String, Boolean> nodeCheck = new ConcurrentHashMap<String, Boolean>();
 	private String[] whitekList = { "127.0.0.1", "192.168.11.26" };

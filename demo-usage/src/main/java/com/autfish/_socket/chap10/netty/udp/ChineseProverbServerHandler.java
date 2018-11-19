@@ -21,21 +21,20 @@ public class ChineseProverbServerHandler extends
 	}
 
 	@Override
-	public void messageReceived(ChannelHandlerContext ctx, DatagramPacket packet)
-			throws Exception {
-		String req = packet.content().toString(CharsetUtil.UTF_8);
-		System.out.println(req);
-		if ("谚语字典查询?".equals(req)) {
-			ctx.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer(
-					"谚语查询结果: " + nextQuote(), CharsetUtil.UTF_8), packet
-					.sender()));
-		}
-	}
-
-	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
 			throws Exception {
 		ctx.close();
 		cause.printStackTrace();
+	}
+
+	@Override
+	protected void channelRead0(ChannelHandlerContext channelHandlerContext, DatagramPacket datagramPacket) throws Exception {
+		String req = datagramPacket.content().toString(CharsetUtil.UTF_8);
+		System.out.println(req);
+		if ("谚语字典查询?".equals(req)) {
+			channelHandlerContext.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer(
+					"谚语查询结果: " + nextQuote(), CharsetUtil.UTF_8), datagramPacket
+					.sender()));
+		}
 	}
 }

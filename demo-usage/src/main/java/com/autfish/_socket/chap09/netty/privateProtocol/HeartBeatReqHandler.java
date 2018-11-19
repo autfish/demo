@@ -1,13 +1,13 @@
 package com.autfish._socket.chap09.netty.privateProtocol;
 
 import com.autfish._socket.Message;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-public class HeartBeatReqHandler extends ChannelHandlerAdapter {
+public class HeartBeatReqHandler extends ChannelInboundHandlerAdapter {
 
 	private volatile ScheduledFuture<?> heartBeat;
 

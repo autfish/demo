@@ -5,12 +5,7 @@ import static io.netty.handler.codec.http.HttpResponseStatus.*;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelProgressiveFuture;
-import io.netty.channel.ChannelProgressiveFutureListener;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.*;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.DefaultHttpResponse;
 import io.netty.handler.codec.http.FullHttpRequest;
@@ -40,7 +35,7 @@ public class HttpFileServerHandler extends
 	}
 
 	@Override
-	public void messageReceived(ChannelHandlerContext ctx,
+	public void channelRead0(ChannelHandlerContext ctx,
 			FullHttpRequest request) throws Exception {
 		if (!request.decoderResult().isSuccess()) {
 			sendError(ctx, BAD_REQUEST);
