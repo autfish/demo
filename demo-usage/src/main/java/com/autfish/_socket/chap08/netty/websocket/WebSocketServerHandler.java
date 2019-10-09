@@ -24,7 +24,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
 
 	private WebSocketServerHandshaker handshaker;
 
-	@Override
+	//@Override
 	public void channelRead0(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
 		// 传统的HTTP接入
@@ -120,5 +120,10 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
 
 	private static boolean isKeepAlive(FullHttpRequest request) {
 		return !request.headers().get("Connection").equals("close");
+	}
+
+	@Override
+	protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception {
+
 	}
 }

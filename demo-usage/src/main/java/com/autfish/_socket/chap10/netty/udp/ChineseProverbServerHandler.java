@@ -27,7 +27,7 @@ public class ChineseProverbServerHandler extends
 		cause.printStackTrace();
 	}
 
-	@Override
+	//@Override
 	protected void channelRead0(ChannelHandlerContext channelHandlerContext, DatagramPacket datagramPacket) throws Exception {
 		String req = datagramPacket.content().toString(CharsetUtil.UTF_8);
 		System.out.println(req);
@@ -36,5 +36,10 @@ public class ChineseProverbServerHandler extends
 					"谚语查询结果: " + nextQuote(), CharsetUtil.UTF_8), datagramPacket
 					.sender()));
 		}
+	}
+
+	@Override
+	protected void messageReceived(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception {
+
 	}
 }

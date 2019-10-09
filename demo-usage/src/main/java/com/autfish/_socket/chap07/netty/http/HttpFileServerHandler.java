@@ -34,7 +34,7 @@ public class HttpFileServerHandler extends
 		this.url = url;
 	}
 
-	@Override
+	//@Override
 	public void channelRead0(ChannelHandlerContext ctx,
 			FullHttpRequest request) throws Exception {
 		if (!request.decoderResult().isSuccess()) {
@@ -210,5 +210,10 @@ public class HttpFileServerHandler extends
 
 	private static boolean isKeepAlive(FullHttpRequest request) {
 		return !request.headers().get("Connection").equals("close");
+	}
+
+	@Override
+	protected void messageReceived(ChannelHandlerContext ctx, FullHttpRequest msg) throws Exception {
+
 	}
 }

@@ -8,7 +8,7 @@ import io.netty.util.CharsetUtil;
 public class ChineseProverbClientHandler extends
 		SimpleChannelInboundHandler<DatagramPacket> {
 
-	@Override
+	//@Override
 	public void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg) {
 		String response = msg.content().toString(CharsetUtil.UTF_8);
 		if (response.startsWith("谚语查询结果: ")) {
@@ -23,4 +23,10 @@ public class ChineseProverbClientHandler extends
 		cause.printStackTrace();
 		ctx.close();
 	}
+
+	@Override
+	protected void messageReceived(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception {
+
+	}
 }
+
