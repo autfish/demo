@@ -24,7 +24,7 @@ public class ChineseProverbClientHandler extends
 		ctx.close();
 	}
 
-	@Override
+	//@Override
 	protected void messageReceived(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception {
 
 	}

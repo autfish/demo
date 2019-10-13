@@ -122,7 +122,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
 		return !request.headers().get("Connection").equals("close");
 	}
 
-	@Override
+	//@Override
 	protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception {
 
 	}

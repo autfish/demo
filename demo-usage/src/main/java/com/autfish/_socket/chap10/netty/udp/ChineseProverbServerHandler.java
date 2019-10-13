@@ -38,7 +38,7 @@ public class ChineseProverbServerHandler extends
 		}
 	}
 
-	@Override
+	//@Override
 	protected void messageReceived(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception {
 
 	}
