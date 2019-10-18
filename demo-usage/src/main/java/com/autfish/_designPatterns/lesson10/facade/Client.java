@@ -2,7 +2,7 @@ package com.autfish._designPatterns.lesson10.facade;
 
 public class Client {
 
-    public static void main(String[] args) throws CloneNotSupportedException {
+    public static void main(String[] args) {
 
         UnifiedCardReader unifiedCardReader = new UnifiedCardReader();
         unifiedCardReader.setSdCard(new SDCard());
