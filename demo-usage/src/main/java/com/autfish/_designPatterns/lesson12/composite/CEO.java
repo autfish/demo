@@ -5,8 +5,4 @@ public class CEO extends Employee {
     public CEO(String name, int salary) {
         super(name, salary);
     }
-
-    public String toString() {
-        return "-" + name;
-    }
 }

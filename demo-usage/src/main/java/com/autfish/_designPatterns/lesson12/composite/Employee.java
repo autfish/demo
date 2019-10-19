@@ -33,4 +33,12 @@ public abstract class Employee {
     public void addSubordinate(Employee employee) {
         subordinates.add(employee);
     }
+
+    public List<Employee> getSubordinates() {
+        return subordinates;
+    }
+
+    public String toString() {
+        return "[name: " + name + "; salary:" + salary + "]";
+    }
 }
