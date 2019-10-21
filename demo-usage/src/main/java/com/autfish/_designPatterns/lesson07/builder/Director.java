@@ -8,18 +8,11 @@ public class Director {
         this.builder = builder;
     }
 
-    public boolean build(Order order) {
-        boolean success = builder.checkOrder(order);
-        if(!success) {
-            return false;
-        }
-        success = builder.chechSign(order);
-        if(!success) {
-            return false;
-        }
-        builder.log(order);
-        builder.updateOrder(order);
-        builder.distribute(order);
-        return true;
+    public Pizza build() {
+        builder.makeCrust();
+        builder.addIngredients();
+        builder.addSauce();
+        builder.bake();
+        return builder.getPizza();
     }
 }

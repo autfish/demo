@@ -1,14 +1,18 @@
 package com.autfish._designPatterns.lesson07.builder;
 
-public interface Builder {
+public abstract class Builder {
 
-    boolean checkOrder(Order order);
+    protected Pizza pizza = new Pizza();
 
-    boolean chechSign(Order order);
+    public abstract void makeCrust();
 
-    void log(Order order);
+    public abstract void addIngredients();
 
-    void updateOrder(Order order);
+    public abstract void addSauce();
 
-    void distribute(Order order);
+    public abstract void bake();
+
+    public Pizza getPizza() {
+        return pizza;
+    }
 }

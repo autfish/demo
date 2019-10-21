@@ -4,7 +4,12 @@ public class Client {
 
     public static void main(String[] args) {
 
-        Director director = new Director(new XiaomiBuilder());
-        director.build(new Order());
+        Director director = new Director(new FruitBuilder());
+        Pizza fruidPizza = director.build();
+        System.out.println("制作完成: " + fruidPizza);
+
+        director = new Director(new SeafoodBuilder());
+        Pizza seafoodPizza = director.build();
+        System.out.println("制作完成: " + seafoodPizza);
     }
 }
