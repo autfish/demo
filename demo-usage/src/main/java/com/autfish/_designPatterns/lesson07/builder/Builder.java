@@ -10,6 +10,8 @@ public abstract class Builder {
 
     public abstract void addSauce();
 
+    public abstract void addCheese();
+
     public abstract void bake();
 
     public Pizza getPizza() {

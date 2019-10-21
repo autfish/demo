@@ -12,6 +12,7 @@ public class Director {
         builder.makeCrust();
         builder.addIngredients();
         builder.addSauce();
+        builder.addCheese();
         builder.bake();
         return builder.getPizza();
     }

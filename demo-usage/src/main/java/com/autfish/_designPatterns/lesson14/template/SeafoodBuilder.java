@@ -1,4 +1,4 @@
-package com.autfish._designPatterns.lesson07.builder;
+package com.autfish._designPatterns.lesson14.template;
 
 public class SeafoodBuilder extends Builder {
 
@@ -18,15 +18,5 @@ public class SeafoodBuilder extends Builder {
     public void addSauce() {
         pizza.setSauce("香辣酱");
         System.out.println("加入香辣酱");
-    }
-
-    @Override
-    public void addCheese() {
-        System.out.println("加入芝士");
-    }
-
-    @Override
-    public void bake() {
-        System.out.println("烘烤");
     }
 }

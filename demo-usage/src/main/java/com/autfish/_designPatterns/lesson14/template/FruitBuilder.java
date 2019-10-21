@@ -1,4 +1,4 @@
-package com.autfish._designPatterns.lesson07.builder;
+package com.autfish._designPatterns.lesson14.template;
 
 public class FruitBuilder extends Builder {
     @Override
@@ -17,15 +17,5 @@ public class FruitBuilder extends Builder {
     public void addSauce() {
         pizza.setSauce("番茄酱");
         System.out.println("加入番茄酱");
-    }
-
-    @Override
-    public void addCheese() {
-        System.out.println("加入芝士");
-    }
-
-    @Override
-    public void bake() {
-        System.out.println("烘烤");
     }
 }
